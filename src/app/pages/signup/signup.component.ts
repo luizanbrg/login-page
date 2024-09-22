@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DefaultLoginLayoutComponent } from '../../components/default-login-layout/default-login-layout.component';
+
 import {
   FormControl,
   FormGroup,
@@ -14,7 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 interface SignupForm {
   name: FormControl;
   email: FormControl;
-  passowrd: FormControl;
+  password: FormControl;
   passwordConfirm: FormControl;
 }
 
@@ -54,7 +55,11 @@ export class SignupComponent {
 
   submit() {
     this.loginService
-      .login(this.signupForm.value.email, this.signupForm.value.password)
+      .signup(
+        this.signupForm.value.name,
+        this.signupForm.value.email,
+        this.signupForm.value.password
+      )
       .subscribe({
         next: () => this.toastr.success('Logged in successfully'),
         error: () => this.toastr.error('Unexpected error. Try again later.'),
